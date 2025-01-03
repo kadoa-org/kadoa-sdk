@@ -6,4 +6,3 @@ Welcome to the Kadoa SDK repository! This SDK provides developers with tools and
 ## Languages supported
 
 - [nodeJS](/node)
-- [Python](/python)
