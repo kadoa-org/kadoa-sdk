@@ -1,0 +1,15 @@
+{
+    "name": "kadoa-node",
+    "scripts": {
+        "dev": "bun examples/realtime-events.ts",
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^22.10.5",
+        "bun-types": "^0.1.11",
+        "dotenv": "^16.4.7",
+        "prettier": "^3.4.2"
+    }
+}
