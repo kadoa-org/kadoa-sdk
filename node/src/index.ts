@@ -10,7 +10,7 @@ export class Kadoa {
   private lastHeartbeat: number = Date.now();
   private isConnecting: boolean = false; // Prevent concurrent connections
   private missedHeartbeatsLimit: number = 30000; // 30 seconds without heartbeat
-  private missedHeartbeatCheckTimer?: NodeJS.Timeout;
+  private missedHeartbeatCheckTimer?: ReturnType<typeof setInterval>;
 
   constructor(props: IKadoaProps) {
     if (!props.apiKey && !props.teamApiKey) {
@@ -98,12 +98,12 @@ export class Kadoa {
 
   private startHeartbeatCheck() {
     this.missedHeartbeatCheckTimer = setInterval(() => {
-      if (Date.now() - this.lastHeartbeat > this.missedHeartbeatsLimit) {
-        console.error(
-          "No heartbeat received in 30 seconds! Closing connection.",
-        );
-        this.socket?.close();
-      }
+        if (Date.now() - this.lastHeartbeat > this.missedHeartbeatsLimit) {
+            console.error(
+                "No heartbeat received in 30 seconds! Closing connection.",
+            );
+            this.socket?.close();
+        }
     }, this.heartbeatInterval);
   }
 

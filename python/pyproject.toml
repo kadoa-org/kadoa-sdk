@@ -1,0 +1,11 @@
+[project]
+name = "kadoa-sdk"
+version = "0.1.0"
+description = "Kadoa python SDK"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
+    "websocket-client>=1.8.0",
+]
