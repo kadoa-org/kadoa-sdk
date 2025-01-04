@@ -6,6 +6,6 @@ const kClientProps: IKadoaProps = {
 };
 const kClient = new Kadoa(kClientProps);
 
-kClient.listen((event) => {
+kClient.realtime.listen((event) => {
   console.log("event received", event);
 });
