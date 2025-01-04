@@ -1,4 +1,4 @@
-name: Run Tests with Bun
+name: kadoa-sdk-node
 
 on:
   push:
