@@ -1,4 +1,4 @@
-name: kadoa-sdk-node
+name: sdk-node
 
 on:
   push:
