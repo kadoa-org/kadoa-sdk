@@ -75,16 +75,27 @@ def test_on_message_handle_heartbeat(realtime_instance):
 
     assert realtime_instance.last_heartbeat <= time.time()
 
-def test_on_message_handle_event(realtime_instance):
+def test_on_message_handle_event_with_ack(realtime_instance):
     ws_mock = MagicMock()
-    event_data = {"type": "event", "data": "test"}
+    event_data = {"type": "event", "data": "test", "id": "1234"}
     message = json.dumps(event_data)
 
     mock_callback = MagicMock()
     realtime_instance.listen(mock_callback)
-    realtime_instance.on_message(ws_mock, message)
 
-    mock_callback.assert_called_once_with(event_data)
+    with patch("requests.post") as mock_ack_post:
+        mock_ack_response = MagicMock()
+        mock_ack_response.status_code = 200
+        mock_ack_post.return_value = mock_ack_response
+
+        realtime_instance.on_message(ws_mock, message)
+
+        mock_ack_post.assert_called_once_with(
+            "https://realtime.kadoa.com/api/v1/events/ack",
+            headers={"Content-Type": "application/json"},
+            json={"id": "1234"}
+        )
+        mock_callback.assert_called_once_with(event_data)
 
 def test_on_close(realtime_instance):
     ws_mock = MagicMock()
@@ -98,4 +109,4 @@ def test_on_error(realtime_instance):
     realtime_instance.on_error(ws_mock, error)
 
     assert realtime_instance.is_connecting is False
-    ws_mock.close.assert_called_once()  # Ensure close is called on error
+    ws_mock.close.assert_called_once()

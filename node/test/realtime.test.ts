@@ -158,3 +158,66 @@ test("stops heartbeat check on socket close", async () => {
 
   clearIntervalSpy.mockRestore();
 });
+
+
+
+// Acknowledgement Tests
+
+// Acknowledgement Tests
+
+test("sends acknowledgment for messages with an id", async () => {
+  instance = new Realtime("mock-team-api-key");
+  const mockCallback = vi.fn();
+  instance.listen(mockCallback);
+
+  await new Promise((resolve) => setTimeout(resolve, 0)); // Ensure async events are handled
+
+  mockWebSocket.onopen?.(new Event("open"));
+
+  const testPayload = { id: "12345", event: "update", data: { key: "value" } };
+  const mockMessage = { data: JSON.stringify(testPayload) };
+
+  // Spy to log fetch requests
+  const fetchSpy = vi.spyOn(global, "fetch");
+
+  // Trigger onmessage event with payload containing an id
+  mockWebSocket.onmessage?.(new MessageEvent("message", mockMessage));
+
+  // console.log(JSON.stringify(fetchSpy.mock.calls));
+
+  // Assert fetch is called with correct URL and options
+  expect(mockFetch).toHaveBeenCalledTimes(2); // Initial fetch + ack fetch
+  // expect(mockFetch).toHaveBeenCalledWith(
+  //   `${process.env.WSS_API_URI}/api/v1/events/ack`,
+  //   expect.objectContaining({
+  //     method: "POST",
+  //     headers: expect.objectContaining({ "Content-Type": "application/json" }),
+  //     body: JSON.stringify({ id: "12345" }),
+  //   }),
+  // );
+
+  // Ensure the callback is called with the event data
+  // expect(mockCallback).toHaveBeenCalledWith(testPayload);
+
+  fetchSpy.mockRestore();
+});
+
+
+
+
+test("don't send acknowledgment for messages without id", async () => {
+  instance = new Realtime("mock-team-api-key");
+  const mockCallback = vi.fn();
+  instance.listen(mockCallback);
+
+  await new Promise((resolve) => setTimeout(resolve, 0)); // Ensure async events are handled
+
+  mockWebSocket.onopen?.(new Event("open"));
+
+  const testPayload = {  event: "update", data: { key: "value" } };
+  const mockMessage = { data: JSON.stringify(testPayload) };
+
+  mockWebSocket.onmessage?.(new MessageEvent("message", mockMessage));
+
+  expect(mockFetch).toHaveBeenCalledTimes(1); // Initial fetch only
+});

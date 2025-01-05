@@ -7,6 +7,7 @@ import requests
 
 WSS_API_URI = os.getenv("WSS_KADOA_API_URI", "wss://realtime.kadoa.com")
 PUBLIC_API_URI = os.getenv("PUBLIC_KADOA_API_URI", "https://api.kadoa.com")
+REALTIME_API_URI = os.getenv("REALTIME_KADOA_API_URI", "https://realtime.kadoa.com")
 
 class Realtime:
     def __init__(self, team_api_key):
@@ -73,8 +74,20 @@ class Realtime:
             data = json.loads(message)
             if data.get("type") == "heartbeat":
                 self.handle_heartbeat(data)
-            elif self.handle_event:
-                self.handle_event(data)
+            else:
+                # Send acknowledgment if data contains an id
+                if "id" in data:
+                    try:
+                        requests.post(
+                            f"{REALTIME_API_URI}/api/v1/events/ack",
+                            headers={"Content-Type": "application/json"},
+                            json={"id": data["id"]},
+                        )
+                    except Exception as e:
+                        print(f"Failed to send acknowledgment: {e}")
+                
+                if self.handle_event:
+                    self.handle_event(data)
         except Exception as e:
             print(f"Failed to parse incoming message: {e}")
 

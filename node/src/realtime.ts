@@ -1,4 +1,4 @@
-import { WSS_API_URI, PUBLIC_API_URI } from "./constants";
+import { WSS_API_URI, REALTIME_API_URI, PUBLIC_API_URI } from "./constants";
 
 export class Realtime {
   private socket?: WebSocket;
@@ -59,6 +59,13 @@ export class Realtime {
           if (data.type === "heartbeat") {
             this.handleHeartbeat();
           } else {
+            if (data?.id) {
+              fetch(`${REALTIME_API_URI}/api/v1/events/ack`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ id: data.id })
+              });
+          }
             this.handleEvent(data);
           }
         } catch (err) {
