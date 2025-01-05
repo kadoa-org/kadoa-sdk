@@ -1,8 +1,5 @@
 name: sdk-python
 
-env:
-  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-
 on:
   push:
     branches:
@@ -35,7 +32,7 @@ jobs:
         run: |
           echo "[pypi]" > ~/.pypirc
           echo "  username = __token__" >> ~/.pypirc
-          echo "  password = $PYPI_TOKEN" >> ~/.pypirc
+          echo "  password = ${{ secrets.PYPI_TOKEN }}" >> ~/.pypirc
         shell: bash
 
       # WIP: Uncomment the following steps to bump the version and publish the package to PyPI
