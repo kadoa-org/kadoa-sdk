@@ -17,6 +17,7 @@ packages = ["kadoa_sdk"]
 dev = [
     "bump2version>=1.0.1",
     "pytest>=8.3.4",
+    "semver>=3.0.2",
     "twine>=6.0.1",
 ]
 
