@@ -28,6 +28,10 @@ jobs:
       - name: Run tests
         run: bun test
         working-directory: node/
+      
+      - name: Build
+        run: bun pack
+        working-directory: node/
 
       # - name: Upload test results (optional)
       #   uses: actions/upload-artifact@v3
