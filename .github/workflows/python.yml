@@ -2,19 +2,13 @@ name: sdk-python
 
 env:
   PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-  CODE_PATH: python/**
 
 on:
   push:
     branches:
       - main
     paths:
-      - ${{ env.CODE_PATH }}
-  # pull_request:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - ${{ env.CODE_PATH }}
+      - python/**
   workflow_dispatch:
 
 jobs:
