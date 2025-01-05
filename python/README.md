@@ -15,7 +15,7 @@ kadoa_props = {
     "team_api_key": os.getenv("KADOA_TEAM_API_KEY")
 }
 kadoa_client = Kadoa(**kadoa_props)
-kadoa_client.listen(process_event)
+kadoa_client.realtime.listen(process_event)
 ```
 
 installe
