@@ -48,7 +48,6 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks(); // Resets all mocks
-  vi.restoreAllMocks(); // Ensure clearInterval is called properly
   if (mockWebSocket) {
     mockWebSocket.send.mockReset();
     mockWebSocket.close.mockReset();
