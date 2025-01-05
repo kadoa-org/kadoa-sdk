@@ -29,5 +29,5 @@ jobs:
         working-directory: python/
 
       - name: Run tests
-        run: pytest test/
+        run: uv venv exec pytest test/
         working-directory: python/
