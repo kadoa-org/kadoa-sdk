@@ -1,5 +1,8 @@
+import os, sys
+mypath = os.path.join(os.path.dirname(__file__), "..")
+sys.path.append(mypath)
+
 from modules.core import Kadoa
-import os
 
 def process_event(event):
     print(f"Received event: {event['id']}, type: {event['type']}")
