@@ -7,7 +7,7 @@ import json
 import time
 import threading
 from unittest.mock import MagicMock, patch
-from modules.realtime import Realtime
+from kadoa_sdk.realtime import Realtime
 
 @pytest.fixture
 def mock_requests_post():
