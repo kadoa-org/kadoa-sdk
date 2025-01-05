@@ -41,4 +41,4 @@ Install dependencies
 
 Start example
 
-`uv run src/__init__.py`
+`uv run examples/realtime_events.py`
