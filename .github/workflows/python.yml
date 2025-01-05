@@ -38,10 +38,11 @@ jobs:
           echo "  password = $PYPI_TOKEN" >> ~/.pypirc
         shell: bash
 
-      # - name: Bump version
-      #   run: |
-      #     uv run bump2version patch
-      #   working-directory: python/
+      - name: Bump version
+        run: |
+          VERSION=$(uvx --from=toml-cli toml get --toml-path=pyproject.toml project.version)
+          echo "Current version: $VERSION"
+        working-directory: python/
 
       # - name: Publish package to PyPI
       #   run: |
