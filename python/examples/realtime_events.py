@@ -1,6 +1,6 @@
 import os, sys
-mypath = os.path.join(os.path.dirname(__file__), "..")
-sys.path.append(mypath)
+root_path = os.path.join(os.path.dirname(__file__), "..")
+sys.path.append(root_path)
 
 from kadoa_sdk.core import Kadoa
 
