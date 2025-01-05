@@ -9,7 +9,7 @@
 ### Usage
 
 ```python
-from kadoa-sdk import Kadoa
+from kadoa_sdk import Kadoa
 kadoa_props = {
     "api_key": None,
     "team_api_key": os.getenv("KADOA_TEAM_API_KEY")
@@ -18,7 +18,6 @@ kadoa_client = Kadoa(**kadoa_props)
 kadoa_client.realtime.listen(process_event)
 ```
 
-installe
 ## Examples
 
 ### Requirements

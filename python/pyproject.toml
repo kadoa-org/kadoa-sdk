@@ -1,7 +1,7 @@
 [project]
 name = "kadoa-sdk"
-version = "0.1.0"
-description = "Kadoa python SDK"
+version = "0.1.4"
+description = "Kadoa official python SDK"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -10,9 +10,13 @@ dependencies = [
     "websocket-client>=1.8.0",
 ]
 
+[tool.setuptools]
+packages = ["kadoa_sdk"]
+
 [dependency-groups]
 dev = [
     "pytest>=8.3.4",
+    "twine>=6.0.1",
 ]
 
 [tool.pytest.ini_options]

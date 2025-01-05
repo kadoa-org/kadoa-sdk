@@ -1,5 +1,8 @@
 name: sdk-python
 
+env:
+  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
 on:
   push:
     branches:
@@ -30,4 +33,8 @@ jobs:
 
       - name: Run tests
         run: uv run pytest test/
+        working-directory: python/
+      
+      - name: Initialize PyPI config from token
+        run: echo $PYPI_TOKEN | uv run twine login --username __token__ --password-stdin
         working-directory: python/
