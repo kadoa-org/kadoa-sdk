@@ -87,6 +87,7 @@ class Realtime:
     def on_error(self, ws, error):
         print(f"WebSocket error: {error}")
         self.is_connecting = False
+        ws.close()
 
     def handle_heartbeat(self, data):
         print("Heartbeat received", data)
@@ -111,3 +112,13 @@ class Realtime:
     def listen(self, callback):
         self.handle_event = callback
         self.connect()
+
+    def disconnect(self):
+        """Forcefully disconnect the WebSocket and clean up resources."""
+        if self.socket:
+            print("Disconnecting WebSocket...")
+            self.socket.close()  # Close the socket
+            self.stop_heartbeat_check()  # Stop any heartbeat check
+            self.is_connecting = False  # Update connection state
+            self.socket = None  # Clear the socket reference
+            self.handle_event = None

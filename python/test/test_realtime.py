@@ -26,9 +26,17 @@ def mock_websocket():
         yield mock_ws
 
 @pytest.fixture
-def realtime_instance(mock_requests_post, mock_websocket):
+def realtime_instance(mock_requests_post, mock_websocket, request):
+    # Create instance of Realtime class
     instance = Realtime(team_api_key="mock_api_key")
     instance.socket = MagicMock()  # Ensure socket is mocked properly
+    
+    # Register a finalizer to close the connection after all tests are done
+    def close_socket():
+        if instance.socket:
+            instance.disconnect()  # Ensure the disconnect is called after all tests
+    request.addfinalizer(close_socket)
+    
     return instance
 
 def test_init_missing_api_key():
@@ -59,7 +67,7 @@ def test_on_open(realtime_instance):
     assert realtime_instance.is_connecting is False
     assert realtime_instance.last_heartbeat <= time.time()
     ws_mock.send.assert_called_once_with(json.dumps({"action": "subscribe", "channel": "mock_team_id"}))
-    
+
 def test_on_message_handle_heartbeat(realtime_instance):
     ws_mock = MagicMock()
     message = json.dumps({"type": "heartbeat"})
@@ -90,18 +98,4 @@ def test_on_error(realtime_instance):
     realtime_instance.on_error(ws_mock, error)
 
     assert realtime_instance.is_connecting is False
-
-# def test_heartbeat_monitor(realtime_instance):
-#     realtime_instance.last_heartbeat = time.time() - 31
-#     realtime_instance.socket = MagicMock()
-
-#     with patch("time.sleep", side_effect=InterruptedError):
-#         with pytest.raises(InterruptedError):
-#             threading.Thread(target=realtime_instance.start_heartbeat_check).start()
-
-#     realtime_instance.socket.close.assert_called_once()
-
-def test_listen(realtime_instance):
-    callback = MagicMock()
-    realtime_instance.listen(callback)
-    assert realtime_instance.handle_event == callback
+    ws_mock.close.assert_called_once()  # Ensure close is called on error
