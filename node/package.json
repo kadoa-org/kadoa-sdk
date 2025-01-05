@@ -1,5 +1,6 @@
 {
     "name": "kadoa-node",
+    "version": "0.0.1",
     "scripts": {
         "dev": "bun examples/realtime-events.ts",
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
