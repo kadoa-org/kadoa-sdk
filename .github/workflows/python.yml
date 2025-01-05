@@ -42,6 +42,10 @@ jobs:
         run: |
           VERSION=$(uvx --from=toml-cli toml get --toml-path=pyproject.toml project.version)
           echo "Current version: $VERSION"
+          # increase the patch version
+          uvx --from=semver-cli semver inc patch $VERSION > version.txt
+          NEW_VERSION=$(cat version.txt)
+          echo "New version: $NEW_VERSION"
         working-directory: python/
 
       # - name: Publish package to PyPI
