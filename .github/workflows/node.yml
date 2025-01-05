@@ -1,12 +1,16 @@
 name: sdk-node
 
+env:
+  CODE_PATH: node/**
+
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - ${{ env.CODE_PATH }}
+  workflow_dispatch:
+
 
 jobs:
   test:
