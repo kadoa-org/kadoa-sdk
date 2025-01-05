@@ -31,10 +31,6 @@ jobs:
         run: uv sync --dev
         working-directory: python/
 
-      # - name: Run tests
-      #   run: uv run pytest test/
-      #   working-directory: python/
-      
       - name: Create .pypirc
         run: |
           echo "[pypi]" > ~/.pypirc
@@ -42,12 +38,12 @@ jobs:
           echo "  password = $PYPI_TOKEN" >> ~/.pypirc
         shell: bash
 
-      - name: Bump version
-        run: |
-          uv run bump2version patch
-        working-directory: python/
+      # - name: Bump version
+      #   run: |
+      #     uv run bump2version patch
+      #   working-directory: python/
 
-      - name: Publish package to PyPI
-        run: |
-          make publish
-        working-directory: python/
+      # - name: Publish package to PyPI
+      #   run: |
+      #     make publish
+      #   working-directory: python/
