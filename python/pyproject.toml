@@ -9,3 +9,13 @@ dependencies = [
     "requests>=2.32.3",
     "websocket-client>=1.8.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
