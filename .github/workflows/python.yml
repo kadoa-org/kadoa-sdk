@@ -42,6 +42,11 @@ jobs:
           echo "  password = $PYPI_TOKEN" >> ~/.pypirc
         shell: bash
 
+      - name: Bump version
+        run: |
+          uv run bump2version patch
+        working-directory: python/
+
       - name: Publish package to PyPI
         run: |
           make publish
