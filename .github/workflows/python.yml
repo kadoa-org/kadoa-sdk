@@ -35,6 +35,13 @@ jobs:
         run: uv run pytest test/
         working-directory: python/
       
-      - name: Initialize PyPI config from token
-        run: echo $PYPI_TOKEN | uv run twine login --username __token__ --password-stdin
+      - name: Create .pypirc
+        run: |
+          echo "[pypi]" > ~/.pypirc
+          echo "  username = __token__" >> ~/.pypirc
+          echo "  password = $PYPI_TOKEN" >> ~/.pypirc
+        shell: bash
+
+      - name: Publish package to PyPI
+        run: uv run twine upload dist/*
         working-directory: python/
