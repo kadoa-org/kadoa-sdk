@@ -274,6 +274,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "bump2version" },
+    { name = "pysemver" },
     { name = "pytest" },
     { name = "semver" },
     { name = "twine" },
@@ -289,6 +290,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "bump2version", specifier = ">=1.0.1" },
+    { name = "pysemver", specifier = ">=0.5.0" },
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "semver", specifier = ">=3.0.2" },
     { name = "twine", specifier = ">=6.0.1" },
@@ -417,6 +419,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/d3/c0/9c9832e5be227c40e
 wheels = [
     { url = "https://files.pythonhosted.org/packages/20/dc/fde3e7ac4d279a331676829af4afafd113b34272393d73f610e8f0329221/pygments-2.19.0-py3-none-any.whl", hash = "sha256:4755e6e64d22161d5b61432c0600c923c5927214e7c956e31c23923c89251a9b", size = 1225305 },
 ]
+
+[[package]]
+name = "pysemver"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/60/99/c6fa62330c7b5da7f76d1060acc50fbeb42e61995ae2329b699028d9ff20/pysemver-0.5.0.tar.gz", hash = "sha256:fa924a4d8bf5e40b48e3058a1d868f7f0ab3a8f0286ed208f32e6f9020c60970", size = 2410 }
 
 [[package]]
 name = "pytest"
