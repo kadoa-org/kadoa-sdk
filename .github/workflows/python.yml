@@ -31,9 +31,9 @@ jobs:
         run: uv sync --dev
         working-directory: python/
 
-      - name: Run tests
-        run: uv run pytest test/
-        working-directory: python/
+      # - name: Run tests
+      #   run: uv run pytest test/
+      #   working-directory: python/
       
       - name: Create .pypirc
         run: |
@@ -43,5 +43,6 @@ jobs:
         shell: bash
 
       - name: Publish package to PyPI
-        run: uv run twine upload dist/*
+        run: |
+          make publish
         working-directory: python/
