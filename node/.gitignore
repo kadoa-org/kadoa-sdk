@@ -181,3 +181,5 @@ test/js/third_party/prisma/prisma/sqlite/dev.db-journal
 scratch*.{js,ts,tsx,cjs,mjs}
 
 node_modules
+
+*.tgz
