@@ -4,9 +4,9 @@
 
 `pip install kadoa-sdk`
 
-It's recommended to store Kadoa credentials in a `.env` file and use `python-dotenv` library to make api key available to the runtime. Also make sure those .env files are excluded from version control.
+It is recommended to store Kadoa credentials in a `.env` file and use the `python-dotenv` library to make the API key available at runtime. Also, ensure that these `.env` files are excluded from version control.
 
-### Client initialization
+### Client Initialization
 
 ```python
 import os
@@ -17,24 +17,25 @@ kadoa_props = {
 }
 kadoa_client = Kadoa(**kadoa_props)
 ```
-- `team_api_key` is required for enterprise features, where applicable
-- `api_key` stands for personal API key, used where personal API key is applicable
+- `team_api_key` is required for enterprise features, where applicable.
+- `api_key` represents a personal API key, used where a personal API key is applicable.
 
 ## Features
 
-### Realtime events monitoring
+### Real-time Events Monitoring
 
-You can bring your own processing function to process real-time monitoring events as below:
+You can bring your own processing function to handle real-time monitoring events, as shown below:
 
 ```python
-def custom_process_env(event):
-    # process event
+def custom_process_event(event):
+    # Process event
 
-kadoa_client.realtime.listen(custom_process_env)
+kadoa_client.realtime.listen(custom_process_event)
 ```
 
-If authentication worked for realtime.listen, you should see "Connected" displayed and Heartbeat events similar to this `Heartbeat received {'type': 'heartbeat', 'timestamp': 1736101321032}` on a periodic basis (e.g.: every 15s).
+If authentication succeeds for `realtime.listen`, you should see "Connected" displayed and receive heartbeat events similar to this: `Heartbeat received {'type': 'heartbeat', 'timestamp': 1736101321032}` periodically (e.g., every 15 seconds).
 
-The client will automatically try to reconnect if it doesn't receive a heartbeat.
-Note that, if a monitoring message isn't delivered during that reconnection process, it'll be delivered as soon as the client reconnects (manually when restarting the program or automatically if no heartbeat is received).
+The client will automatically attempt to reconnect if it does not receive a heartbeat.
+
+Note that if a monitoring message is not delivered during the reconnection process, it will be delivered as soon as the client reconnects (either manually when restarting the program or automatically if no heartbeat is received).
 
