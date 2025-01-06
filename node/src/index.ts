@@ -3,7 +3,7 @@ export class Kadoa {
   private teamApiKey?: string;
   private _realtime?: Realtime;
 
-  constructor(props: IKadoaProps) {
+  constructor(props) {
     if (!props.apiKey && !props.teamApiKey) {
       throw new Error("apiKey or teamApiKey must be passed");
     }
@@ -17,3 +17,5 @@ export class Kadoa {
     return this._realtime;
   }
 }
+
+export * from "./types";

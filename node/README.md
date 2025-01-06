@@ -1,4 +1,4 @@
-# NodeJS SDK
+# Kadoa node SDK
 
 ## Get Started
 
@@ -11,7 +11,8 @@ It is recommended to store Kadoa credentials in an `.env` file and use a library
 ```typescript
 import dotenv from 'dotenv';
 dotenv.config();
-import { Kadoa, IKadoaProps } from '@kadoa/node';
+import { Kadoa } from '@kadoa/node';
+import type {IKadoaProps} from '@kadoa/node';
 
 const kadoaProps: IKadoaProps = {
   teamApiKey: process.env.KADOA_TEAM_API_KEY,

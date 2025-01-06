@@ -1,6 +1,6 @@
 {
     "name": "@kadoa/node",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "source": "src/index.ts",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -13,14 +13,15 @@
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
         "type-check": "tsc",
         "clean": "rm -rf dist",
-        "compile": "bun clean && bun build src/index.ts --outdir dist --minify"
+        "compile": "bun clean && bun src/build.ts"
     },
     "dependencies": {},
     "devDependencies": {
-        "@types/bun": "^1.1.14",
         "@types/node": "^22.10.5",
+        "bun-plugin-dts": "^0.3.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
+        "typescript": "^5.7.2",
         "vitest": "^2.1.8"
     }
 }
