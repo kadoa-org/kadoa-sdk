@@ -3,7 +3,7 @@ export class Kadoa {
   private teamApiKey?: string;
   private _realtime?: Realtime;
 
-  constructor(props) {
+  constructor(props: { apiKey?: string; teamApiKey?: string }) {
     if (!props.apiKey && !props.teamApiKey) {
       throw new Error("apiKey or teamApiKey must be passed");
     }
