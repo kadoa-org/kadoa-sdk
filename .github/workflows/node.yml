@@ -31,7 +31,7 @@ jobs:
         working-directory: node/
       
       - name: Build
-        run: bun pack
+        run: bun compile
         working-directory: node/
 
       # - name: Upload test results (optional)
