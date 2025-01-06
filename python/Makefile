@@ -13,3 +13,7 @@ test:
 .PHONY: publish
 publish: clean test build
 	uv run twine upload dist/*
+
+.PHONY: install
+install:
+	uv sync
