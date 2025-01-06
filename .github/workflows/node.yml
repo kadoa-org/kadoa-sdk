@@ -33,10 +33,3 @@ jobs:
       - name: Build
         run: bun compile
         working-directory: node/
-
-      # - name: Upload test results (optional)
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-results
-      #     path: node/test-results/
-      #     if-no-files-found: ignore
