@@ -1,5 +1,9 @@
 import { WSS_API_URI, REALTIME_API_URI, PUBLIC_API_URI } from "./constants";
-import { WebSocket } from "ws";
+
+// if WebSocket doesn't exist in the global scope, import it
+if (typeof WebSocket === "undefined") {
+  global.WebSocket = require("ws");
+}
 
 export class Realtime {
   private socket?: WebSocket;
@@ -54,7 +58,7 @@ export class Realtime {
         this.startHeartbeatCheck();
       };
 
-      this.socket.onmessage = (event: any) => {
+      this.socket.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
           if (data.type === "heartbeat") {
@@ -62,11 +66,11 @@ export class Realtime {
           } else {
             if (data?.id) {
               fetch(`${REALTIME_API_URI}/api/v1/events/ack`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: data.id }),
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ id: data.id })
               });
-            }
+          }
             this.handleEvent(data);
           }
         } catch (err) {

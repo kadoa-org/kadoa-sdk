@@ -56,9 +56,7 @@ afterEach(() => {
 
 // Constructor Tests
 test("constructor throws error if no teamApiKey is provided", () => {
-  expect(() => new Realtime()).toThrow(
-    "teamApiKey is required for Realtime connection",
-  );
+  expect(() => new Realtime()).toThrow("teamApiKey is required for Realtime connection");
 });
 
 test("constructor initializes with valid teamApiKey", () => {
@@ -102,9 +100,7 @@ test("heartbeat message updates lastHeartbeat", async () => {
   const initialHeartbeat = instance["lastHeartbeat"];
   const heartbeatMessage = { type: "heartbeat" };
 
-  mockWebSocket.onmessage?.(
-    new MessageEvent("message", { data: JSON.stringify(heartbeatMessage) }),
-  );
+  mockWebSocket.onmessage?.(new MessageEvent("message", { data: JSON.stringify(heartbeatMessage) }));
 
   expect(instance["lastHeartbeat"]).toBeGreaterThanOrEqual(initialHeartbeat);
 });
@@ -130,9 +126,7 @@ test("attempts to reconnect after socket close", async () => {
 
 // Error Handling Tests
 test("logs error when WebSocket encounters an error", async () => {
-  const consoleErrorSpy = vi
-    .spyOn(console, "error")
-    .mockImplementation(() => {});
+  const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
   instance = new Realtime("mock-team-api-key");
   instance.listen(() => {});
@@ -164,6 +158,8 @@ test("stops heartbeat check on socket close", async () => {
 
   clearIntervalSpy.mockRestore();
 });
+
+
 
 // Acknowledgement Tests
 
@@ -206,6 +202,9 @@ test("sends acknowledgment for messages with an id", async () => {
   fetchSpy.mockRestore();
 });
 
+
+
+
 test("don't send acknowledgment for messages without id", async () => {
   instance = new Realtime("mock-team-api-key");
   const mockCallback = vi.fn();
@@ -215,7 +214,7 @@ test("don't send acknowledgment for messages without id", async () => {
 
   mockWebSocket.onopen?.(new Event("open"));
 
-  const testPayload = { event: "update", data: { key: "value" } };
+  const testPayload = {  event: "update", data: { key: "value" } };
   const mockMessage = { data: JSON.stringify(testPayload) };
 
   mockWebSocket.onmessage?.(new MessageEvent("message", mockMessage));
