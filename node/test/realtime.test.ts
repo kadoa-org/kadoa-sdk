@@ -163,8 +163,6 @@ test("stops heartbeat check on socket close", async () => {
 
 // Acknowledgement Tests
 
-// Acknowledgement Tests
-
 test("sends acknowledgment for messages with an id", async () => {
   instance = new Realtime("mock-team-api-key");
   const mockCallback = vi.fn();
