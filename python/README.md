@@ -1,5 +1,9 @@
 # Python SDK
 
+## Requirements
+
+- Python 3.10+
+
 ## Get Started
 
 `pip install kadoa-sdk`
