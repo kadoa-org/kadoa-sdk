@@ -36,7 +36,7 @@ class Realtime:
                 f"{PUBLIC_API_URI}/v4/oauth2/token",
                 headers={
                     "Content-Type": "application/json",
-                    "Authorization": f"Bearer {self.team_api_key}",
+                    "x-api-key": self.team_api_key,
                 },
             )
 
