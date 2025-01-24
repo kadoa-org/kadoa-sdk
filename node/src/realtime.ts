@@ -32,7 +32,7 @@ export class Realtime {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${this.teamApiKey}`,
+          "x-api-key": this.teamApiKey,
         },
       });
 
