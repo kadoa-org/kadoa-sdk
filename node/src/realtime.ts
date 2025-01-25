@@ -1,4 +1,5 @@
 import { WSS_API_URI, REALTIME_API_URI, PUBLIC_API_URI } from "./constants";
+import { SDK_VERSION } from "./version";
 
 // if WebSocket doesn't exist in the global scope, import it
 if (typeof WebSocket === "undefined") {
@@ -33,6 +34,7 @@ export class Realtime {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": `${this.teamApiKey}`,
+          "x-sdk-version": SDK_VERSION,
         },
       });
 
@@ -66,11 +68,11 @@ export class Realtime {
           } else {
             if (data?.id) {
               fetch(`${REALTIME_API_URI}/api/v1/events/ack`, {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ id: data.id })
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: data.id }),
               });
-          }
+            }
             this.handleEvent(data);
           }
         } catch (err) {

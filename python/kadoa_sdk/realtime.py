@@ -4,6 +4,7 @@ import time
 import threading
 import websocket
 import requests
+from .version import SDK_VERSION
 
 WSS_API_URI = os.getenv("WSS_KADOA_API_URI", "wss://realtime.kadoa.com")
 PUBLIC_API_URI = os.getenv("PUBLIC_KADOA_API_URI", "https://api.kadoa.com")
@@ -37,6 +38,7 @@ class Realtime:
                 headers={
                     "Content-Type": "application/json",
                     "x-api-key": self.team_api_key,
+                    "x-sdk-version": SDK_VERSION,  # Add version header
                 },
             )
 

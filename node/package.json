@@ -1,30 +1,30 @@
 {
-    "name": "@kadoa/node",
-    "version": "0.1.0",
-    "source": "src/index.ts",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist/"
-    ],
-    "scripts": {
-        "dev": "bun examples/realtime-events.ts",
-        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
-        "type-check": "tsc",
-        "clean": "rm -rf dist",
-        "compile": "bun clean && tsup"
-    },
-    "dependencies": {
-        "ws": "^8.18.0"
-    },
-    "devDependencies": {
-        "@types/node": "^22.10.5",
-        "@types/ws": "^8.5.13",
-        "dotenv": "^16.4.7",
-        "prettier": "^3.4.2",
-        "tsup": "^8.3.5",
-        "typescript": "^5.7.2",
-        "vitest": "^2.1.8"
-    }
+  "name": "@kadoa/node",
+  "version": "0.1.1",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "dev": "bun examples/realtime-events.ts",
+    "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+    "type-check": "tsc",
+    "clean": "rm -rf dist",
+    "compile": "bun clean && tsup"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/ws": "^8.5.13",
+    "dotenv": "^16.4.7",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
 }
